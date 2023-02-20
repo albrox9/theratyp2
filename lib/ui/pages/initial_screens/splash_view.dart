@@ -43,6 +43,11 @@ class _State extends State<SplashView> with TickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.max,
                 children: [
+                  const Text("Welcome to Theratyp!",
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold)),
                   const Image(
                     image: AssetImage('assets/images/onboarding4.png'),
                   ),
@@ -50,7 +55,6 @@ class _State extends State<SplashView> with TickerProviderStateMixin {
                       style: TextStyle(
                           color: Colors.green,
                           fontSize: 23,
-                          fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold)),
                   CircularProgressIndicator(
                     value: controller.value,

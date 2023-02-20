@@ -18,12 +18,13 @@ class InputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 5),
       child: TextFormField(
         cursorColor: Colors.black.withOpacity(.5),
         controller: controller,
         obscureText: bObscureText,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 10),
           prefixIcon: Icon(icon, color: Colors.green.withOpacity(0.3),),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),

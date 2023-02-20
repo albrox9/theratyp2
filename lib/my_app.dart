@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:theratyp/ui/pages/login_view/login_view.dart';
-import 'package:theratyp/ui/pages/splash_view.dart';
+import 'package:theratyp/ui/pages/initial_screens/forgot_password.dart';
+import 'package:theratyp/ui/pages/initial_screens/home_view.dart';
+import 'package:theratyp/ui/pages/initial_screens/sign_in.dart';
+import 'package:theratyp/ui/pages/initial_screens/sign_up.dart';
+import 'package:theratyp/ui/pages/initial_screens/splash_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,16 +17,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginView(),
       debugShowCheckedModeBanner: false,
-
-      /*title: 'Welcome to The Adventurer',
       initialRoute: '/login_view',
       routes: {
         '/splash_view': (context) => const SplashView(),
-        '/login_view': (context) => const LoginView(),
+        '/login_view': (context) => LoginView(),
+        '/sign_up': (context) => SignUp(),
         '/home_view': (context) => const HomeView(),
-      },*/
+        '/forgot_password': (context) => const ForgotPassword(),
+      },
     );
   }
 }

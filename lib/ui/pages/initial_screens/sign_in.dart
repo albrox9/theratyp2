@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:theratyp/ui/pages/home_view.dart';
-import 'package:theratyp/ui/pages/login_view/components/background_image.dart';
-import 'package:theratyp/ui/pages/login_view/components/button_google.dart';
+import 'package:theratyp/ui/pages/initial_screens/forgot_password.dart';
+import 'package:theratyp/ui/pages/initial_screens/home_view.dart';
+import 'package:theratyp/ui/pages/initial_screens/widget_initial/background_image.dart';
+import 'package:theratyp/ui/pages/initial_screens/widget_initial/button_google.dart';
 import 'package:theratyp/ui/widget/button.dart';
 
 import '../../widget/input_text.dart';
+import 'sign_up.dart';
 
 class LoginView extends StatelessWidget {
   final userController = TextEditingController();
@@ -14,7 +16,6 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -25,7 +26,9 @@ class LoginView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Flexible(
-              child: BackgroundImage(),
+              child: BackgroundImage(
+                url: 'assets/images/login.png',
+              ),
             ),
             const Flexible(
               child: Text(
@@ -38,7 +41,7 @@ class LoginView extends StatelessWidget {
             ),
             InputText(
               controller: userController,
-              shintText: 'Username',
+              shintText: 'Email',
               bObscureText: false,
               icon: Icons.alternate_email,
             ),
@@ -50,13 +53,14 @@ class LoginView extends StatelessWidget {
             ),
             Button(
               onTap: () {
+                //TODO VER SI HAY QUE CAMBIAR RUTA HACIA LA HOME
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeView()));
-              },
+                    MaterialPageRoute(builder: (context) => const HomeView()));
+              }, name: 'Sign In',
             ),
             GestureDetector(
               onTap: () {
-                //TODO: NAVIGATOR PANTALLA FORGOT PASSWORD
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const ForgotPassword()));
               },
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
@@ -78,9 +82,22 @@ class LoginView extends StatelessWidget {
             ),
             ButtonGoogle(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeView()));
+                //TODO IMPLEMENTAR LA RUTA DE GOOGLE
+              }, name: 'Sign In with Google',
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => SignUp()));
               },
+              child: const Text.rich(TextSpan(children: [
+                TextSpan(
+                    text: 'New to TheraTyp? ',
+                    style: TextStyle(color: Colors.black)),
+                TextSpan(
+                    text: 'Register now',
+                    style: TextStyle(color: Colors.green)),
+              ])),
             ),
           ],
         ),
