@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:theratyp/ui/pages/initial_screens/forgot_password.dart';
 import 'package:theratyp/ui/pages/initial_screens/home_view.dart';
@@ -18,14 +17,14 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login_view',
+      initialRoute: '/home_view',
       routes: {
         '/splash_view': (context) => const SplashView(),
         '/login_view': (context) => LoginView(),
         '/sign_up': (context) => SignUp(),
         '/home_view': (context) => const HomeView(),
         '/forgot_password': (context) => const ForgotPassword(),
-      },
+      }
     );
   }
 }
