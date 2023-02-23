@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theratyp/ui/pages/initial_screens/forgot_password.dart';
-import 'package:theratyp/ui/pages/initial_screens/home_view.dart';
+import 'package:theratyp/ui/pages/initial_screens/home_view/home_view.dart';
 import 'package:theratyp/ui/pages/initial_screens/sign_in.dart';
 import 'package:theratyp/ui/pages/initial_screens/sign_up.dart';
 import 'package:theratyp/ui/pages/initial_screens/splash_view.dart';

@@ -14,9 +14,10 @@ class _MasonryLayout extends State<MasonryLayout> {
 
   static String key = "AIzaSyBjw98SyzLwdZ0Qo0lD_Uh54TZape07QDk";
 
-  YoutubeAPI youtube = YoutubeAPI(key);
+  YoutubeAPI youtube = YoutubeAPI(key, maxResults: 100);
 
   List<YouTubeVideo> videoResult = [];
+
 
   Future<void> callAPI() async {
     String query = "pilates";

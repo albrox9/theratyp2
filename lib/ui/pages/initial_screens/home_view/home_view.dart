@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:theratyp/ui/widget/masonry_layout.dart';
+import 'package:theratyp/ui/pages/initial_screens/home_view/widget/masonry_layout.dart';
 
 class HomeView extends StatefulWidget {
 
