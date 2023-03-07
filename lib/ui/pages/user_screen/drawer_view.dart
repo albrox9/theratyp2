@@ -19,16 +19,21 @@ class _DrawerViewState extends State<DrawerView> {
   FirebaseAuth _auth = DataHolder().auth;
   Profile profile = DataHolder().profile;
 
+
   void getData() async {
+
     final ref =
         _db.collection("profiles").doc(_auth.currentUser?.uid).withConverter(
               fromFirestore: Profile.fromFirestore,
               toFirestore: (Profile profile, _) => profile.toFirestore(),
             );
-    final docSnap = await ref.get();
-    setState(() {
+
+     final docSnap = await ref.get();
       profile = docSnap.data()!;
-    });
+
+      setState(() {
+
+      });
 
     if (profile != null) {
       print("-----" + profile.name.toString());
@@ -46,6 +51,9 @@ class _DrawerViewState extends State<DrawerView> {
 
   @override
   Widget build(BuildContext context) {
+
+    Future.delayed(const Duration(seconds: 2));
+
     return Drawer(
       child: ListView(
         // Important: Remove any padding from the ListView.
@@ -59,7 +67,7 @@ class _DrawerViewState extends State<DrawerView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage('http://${profile.imagen}'),
+                    backgroundImage: NetworkImage(profile.imagen),
                     radius: 43,
                   ),
                   Text(

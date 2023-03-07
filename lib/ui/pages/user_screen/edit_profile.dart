@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:theratyp/ui/widget/button.dart';
 
 import '../../../data/auth/admin_data.dart';
+import '../../../data/data_holder.dart';
 import '../../widget/input_text.dart';
 
 class EditProfile extends StatefulWidget {
@@ -23,6 +26,26 @@ class _EditProfileState extends State<EditProfile> {
 
   String imageUrl = ' ';
 
+  bool enabledBoton() {
+    bool enabled = false;
+    (_name.text.length > 1 &&
+            _age.text.length > 1 &&
+            _city.text.length > 1 &&
+            _country.text.length > 1)
+        ? enabled = true
+        : enabled = false;
+    return enabled;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isProfile();
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,50 +59,65 @@ class _EditProfileState extends State<EditProfile> {
       ),
       backgroundColor: Colors.white,
       body: Center(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: MediaQuery.of(context).padding,
           //Evita que el teclado tape los input.
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              CircleAvatar(
+                radius: 62.0,
+                backgroundImage: NetworkImage(imageUrl),
+              ),
               IconButton(
                   icon: const Icon(Icons.camera_alt),
                   onPressed: () {
-                    AdminData().pickUploadImage().then((value) => imageUrl);
+                    AdminData().pickUploadImage().then((value) {
+                      setState(() {
+                        imageUrl = value;
+                      });
+                    });
                   }),
-              CircleAvatar(
-                radius: 62.0,
-                //backgroundImage:
-              ),
               InputText(
                 controller: _name,
-                shintText: 'Username',
+                shintText: 'Enter the Username',
                 bObscureText: false,
                 icon: Icons.alternate_email,
               ),
               InputText(
                 controller: _age,
-                shintText: 'Your Age',
+                shintText: 'Enter your age with number',
                 bObscureText: false,
                 icon: Icons.person_3,
               ),
               InputText(
                 controller: _city,
-                shintText: 'Your city',
+                shintText: 'Enter your city',
                 bObscureText: false,
                 icon: Icons.location_city,
               ),
               InputText(
                 controller: _country,
-                shintText: 'Country',
+                shintText: 'Enter yout country',
                 bObscureText: false,
                 icon: Icons.place,
               ),
               Button(
                   onTap: () {
-                    AdminData().insertProfile(_name.text, int.parse(_age.text),
-                        _city.text, _country.text, imageUrl, context);
+                    if (enabledBoton()) {
+                      setState(() {
+                        AdminData().insertProfile(
+                            _name.text,
+                            int.parse(_age.text),
+                            _city.text,
+                            _country.text,
+                            imageUrl,
+                            context);
+                      });
+                    } else {
+                      null;
+                    }
                   },
                   name: 'Update Profile'),
             ],
@@ -87,5 +125,20 @@ class _EditProfileState extends State<EditProfile> {
         ),
       ),
     );
+  }
+
+  Future<void> isProfile() async {
+
+    bool pExist = await AdminData().isGetProfile();
+
+    if (pExist) {
+      setState(() {
+        Navigator.of(context).popAndPushNamed("/home_view");
+      });
+    } else {
+      setState(() {
+        Navigator.of(context).popAndPushNamed("/edit_profile");
+      });
+    }
   }
 }

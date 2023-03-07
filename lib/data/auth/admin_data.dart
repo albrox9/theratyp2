@@ -10,8 +10,11 @@ import '../data_holder.dart';
 import 'dart:io';
 
 class AdminData {
+
   Future pickUploadImage() async {
-    XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    ImagePicker image = ImagePicker();
+    XFile? file = await image.pickImage(source: ImageSource.gallery);
 
     if (file == null) return;
 
@@ -22,8 +25,13 @@ class AdminData {
     Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
 
     try {
-      await referenceImageToUpload.putFile(File(file.path));
-      return await referenceImageToUpload.getDownloadURL();
+
+      await referenceImageToUpload.putFile(File(file!.path));
+      String uri = await referenceImageToUpload.getDownloadURL();
+      print("------------------URI" + uri);
+      return uri;
+
+
     } catch (error) {
       debugPrint(error.toString());
     }
@@ -34,6 +42,7 @@ class AdminData {
     Profile p = Profile(
         name: name, country: country, city: city, age: age, imagen: path);
 
+    print("----------INSERTAR " + path);
     await DataHolder()
         .db
         .collection("profiles")
@@ -44,18 +53,6 @@ class AdminData {
     Navigator.of(context).popAndPushNamed("/home_view");
   }
 
-  Future<DocumentSnapshot<Object?>> getDataUser() async {
-    String? idUser = DataHolder().auth.currentUser?.uid;
-
-    final docRef =
-        DataHolder().db.collection("profiles").doc(idUser).withConverter(
-              fromFirestore: Profile.fromFirestore,
-              toFirestore: (Profile profile, _) => profile.toFirestore(),
-            );
-
-    DocumentSnapshot docsnap = await docRef.get();
-    return docsnap;
-  }
 
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
@@ -105,7 +102,7 @@ class AdminData {
   void signUp(
       String emailAddress, String password, BuildContext context) async {
     try {
-      await DataHolder().auth.createUserWithEmailAndPassword(
+      final credential = await DataHolder().auth.createUserWithEmailAndPassword(
             email: emailAddress,
             password: password,
           );
