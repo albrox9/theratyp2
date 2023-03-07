@@ -2,12 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:theratyp/data/auth/admin_data.dart';
-
 import 'entities/profile.dart';
 
 class DataHolder {
-
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore db = FirebaseFirestore.instance;
   GlobalKey<FormState> keyForm = GlobalKey();
@@ -18,9 +15,7 @@ class DataHolder {
 
   DataHolder._internal();
 
-  factory DataHolder(){
+  factory DataHolder() {
     return _dataHolder;
   }
-
-
 }

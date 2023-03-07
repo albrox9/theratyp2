@@ -5,15 +5,12 @@ import '../../widget/button.dart';
 import '../../widget/input_text.dart';
 
 class ForgotPassword extends StatelessWidget {
-
   ForgotPassword({Key? key}) : super(key: key);
 
   final fpassController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -23,7 +20,9 @@ class ForgotPassword extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Flexible(
-              child: BackgroundImage(url: 'assets/images/forgot.png',),
+              child: BackgroundImage(
+                url: 'assets/images/forgot.png',
+              ),
             ),
             const Flexible(
               child: Text(
@@ -35,25 +34,33 @@ class ForgotPassword extends StatelessWidget {
                 ),
               ),
             ),
-
             InputText(
-              controller: fpassController ,
+              controller: fpassController,
               shintText: 'Enter Email',
               bObscureText: false,
               icon: Icons.alternate_email,
             ),
             Button(
               onTap: () {
-                AdminData().resetPassword(fpassController.text).
-                then((value) => {
-                  if (value == null){
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Email reset send'))),
-                    Navigator.of(context).popAndPushNamed('/login_view')
-                  } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value))),
-                    }
-                });
-              }, name: 'Reset Password',
+                AdminData()
+                    .resetPassword(fpassController.text)
+                    .then((value) => {
+                          if (value == null)
+                            {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Email reset send'))),
+                              Navigator.of(context)
+                                  .popAndPushNamed('/login_view')
+                            }
+                          else
+                            {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(content: Text(value))),
+                            }
+                        });
+              },
+              name: 'Reset Password',
             ),
             GestureDetector(
               onTap: () {
@@ -68,11 +75,9 @@ class ForgotPassword extends StatelessWidget {
                     style: TextStyle(color: Colors.green)),
               ])),
             ),
-
           ],
         ),
       ),
     );
   }
 }
-

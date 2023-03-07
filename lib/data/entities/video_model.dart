@@ -17,12 +17,12 @@ class Video {
 
   factory Video.fromMap(Map<String, dynamic> map) {
     return Video(
-        id: map['id'],
-        kind: map["kind"],
-        title: map['title'],
-        thubnaiUrl: map['default']['medium']['high'],
-        channelUrl: map['channelTitle'],
-        url: map["url"],
+      id: map['id'],
+      kind: map["kind"],
+      title: map['title'],
+      thubnaiUrl: map['default']['medium']['high'],
+      channelUrl: map['channelTitle'],
+      url: map["url"],
     );
   }
 }

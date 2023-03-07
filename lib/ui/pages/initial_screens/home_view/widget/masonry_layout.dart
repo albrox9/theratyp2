@@ -3,12 +3,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:youtube_api/youtube_api.dart';
 
 class MasonryLayout extends StatelessWidget {
+  final List<YouTubeVideo> listaVideo;
 
-
- final  List<YouTubeVideo> listaVideo;
-
-  const MasonryLayout(BuildContext context, {super.key, required this.listaVideo});
-
+  const MasonryLayout(BuildContext context,
+      {super.key, required this.listaVideo});
 
   @override
   Widget build(BuildContext context) {

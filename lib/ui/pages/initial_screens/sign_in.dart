@@ -13,18 +13,14 @@ import '../../widget/input_text.dart';
 import 'sign_up.dart';
 
 class LoginView extends StatelessWidget {
-
-
   LoginView({Key? key}) : super(key: key);
 
   final userController = TextEditingController();
   final userPassword = TextEditingController();
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-
   @override
   Widget build(BuildContext context) {
-
     String? username;
 
     return Scaffold(
@@ -63,20 +59,22 @@ class LoginView extends StatelessWidget {
             ),
             Button(
               onTap: () {
-                //TODO VER SI HAY QUE CAMBIAR RUTA HACIA LA HOME
-
                 AdminData()
                     .singIn(userController.text, userPassword.text, context)
                     .then((result) async => {
-                          if (result == null){
-
-                              if(await AdminData().isGetProfile()){
-                                Navigator.of(context).popAndPushNamed("/home_view")
-                              } else {
-                                Navigator.of(context).popAndPushNamed("/edit_profile")
-                              }
-
-                          }
+                          if (result == null)
+                            {
+                              if (await AdminData().isGetProfile())
+                                {
+                                  Navigator.of(context)
+                                      .popAndPushNamed("/home_view")
+                                }
+                              else
+                                {
+                                  Navigator.of(context)
+                                      .popAndPushNamed("/edit_profile")
+                                }
+                            }
                           else
                             {
                               ScaffoldMessenger.of(context)
@@ -92,10 +90,8 @@ class LoginView extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>  ForgotPassword()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ForgotPassword()));
               },
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
@@ -118,12 +114,10 @@ class LoginView extends StatelessWidget {
             ButtonGoogle(
               onTap: () {
                 //TODO IMPLEMENTAR LA RUTA DE GOOGLE
-                _googleSignIn.signIn().then((value){
-                  Navigator.of(context).popAndPushNamed('/profile_view');
+                _googleSignIn.signIn().then((value) {
+                  Navigator.of(context).popAndPushNamed('/home_view');
                   print(value?.email);
-
                 });
-
               },
               name: 'Sign In with Google',
             ),

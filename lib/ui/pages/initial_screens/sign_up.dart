@@ -9,7 +9,6 @@ import '../../widget/button.dart';
 import '../../widget/input_text.dart';
 
 class SignUp extends StatelessWidget {
-
   SignUp({Key? key}) : super(key: key);
 
   final emailController = TextEditingController();
@@ -59,7 +58,6 @@ class SignUp extends StatelessWidget {
                     shintText: 'Confirm Password',
                     bObscureText: true,
                     icon: Icons.lock,
-
                   ),
                 ],
               ),
@@ -67,13 +65,16 @@ class SignUp extends StatelessWidget {
             Button(
               onTap: () {
                 //TODO IMPLEMENTAR LA RUTA PORQUE NO SE A DONDE VA
-                if(passwordController.text == passwordController2.text){
+                if (passwordController.text == passwordController2.text) {
                   AdminData().signUp(
                       emailController.text, passwordController.text, context);
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Password are not equal", style: TextStyle(fontSize: 16),)))  ;              }
-
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                    "Password are not equal",
+                    style: TextStyle(fontSize: 16),
+                  )));
+                }
               },
               name: 'Sign Up',
             ),

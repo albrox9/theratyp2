@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class Profile {
   final String uid;
   final String? name;
@@ -12,23 +11,21 @@ class Profile {
   //final List<String>? friends;
   //final List<DocumentReference>? rooms;
 
-
   Profile({
     this.uid = "",
-    this.name="",
-    this.age=0,
-    this.city="",
-    this.country="",
-    this.imagen="",
+    this.name = "",
+    this.age = 0,
+    this.city = "",
+    this.country = "",
+    this.imagen = "",
     //this.friends = const [],
     //this.rooms = const [],
-
   });
 
   factory Profile.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options,
-      ){
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data();
     return Profile(
       uid: snapshot.id,
@@ -48,7 +45,7 @@ class Profile {
       if (name != null) "name": name,
       if (city != null) "city": city,
       if (country != null) "country": country,
-      if(imagen != null) "imagen": imagen,
+      if (imagen != null) "imagen": imagen,
       //if (friends!.isNotEmpty) "friends": friends,
       //if (rooms!.isNotEmpty) "rooms": rooms,
     };

@@ -10,15 +10,10 @@ import '../data_holder.dart';
 import 'dart:io';
 
 class AdminData {
-
-
   Future pickUploadImage() async {
-
-
-    ImagePicker image = ImagePicker();
     XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    if(file == null) return;
+    if (file == null) return;
 
     String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference referenceRoot = DataHolder().storage.ref();
@@ -26,22 +21,18 @@ class AdminData {
 
     Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
 
-    try{
-
-      await referenceImageToUpload.putFile(File(file!.path));
+    try {
+      await referenceImageToUpload.putFile(File(file.path));
       return await referenceImageToUpload.getDownloadURL();
-
-
-    }catch(error){
+    } catch (error) {
       debugPrint(error.toString());
     }
-
   }
 
-
-  void insertProfile(String name, int age, String city, String country, String path,
-      BuildContext context) async {
-    Profile p = Profile(name: name, country: country, city: city, age: age, imagen: path);
+  void insertProfile(String name, int age, String city, String country,
+      String path, BuildContext context) async {
+    Profile p = Profile(
+        name: name, country: country, city: city, age: age, imagen: path);
 
     await DataHolder()
         .db
@@ -53,22 +44,18 @@ class AdminData {
     Navigator.of(context).popAndPushNamed("/home_view");
   }
 
-
-  Future<DocumentSnapshot<Object?>> getDataUser()async {
+  Future<DocumentSnapshot<Object?>> getDataUser() async {
     String? idUser = DataHolder().auth.currentUser?.uid;
 
     final docRef =
-    DataHolder().db.collection("profiles").doc(idUser).withConverter(
-      fromFirestore: Profile.fromFirestore,
-      toFirestore: (Profile profile, _) => profile.toFirestore(),
-    );
+        DataHolder().db.collection("profiles").doc(idUser).withConverter(
+              fromFirestore: Profile.fromFirestore,
+              toFirestore: (Profile profile, _) => profile.toFirestore(),
+            );
 
     DocumentSnapshot docsnap = await docRef.get();
     return docsnap;
   }
-
-
-
 
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
@@ -118,7 +105,7 @@ class AdminData {
   void signUp(
       String emailAddress, String password, BuildContext context) async {
     try {
-      final credential = await DataHolder().auth.createUserWithEmailAndPassword(
+      await DataHolder().auth.createUserWithEmailAndPassword(
             email: emailAddress,
             password: password,
           );
@@ -136,20 +123,18 @@ class AdminData {
     }
   }
 
-  Future <bool> isGetProfile() async {
-
+  Future<bool> isGetProfile() async {
     String? idUser = DataHolder().auth.currentUser?.uid;
 
-    final docRef = DataHolder().db.collection("profiles").doc(idUser)
-        .withConverter(fromFirestore: Profile.fromFirestore,
-      toFirestore: (Profile profile, _) => profile.toFirestore(),
-    );
+    final docRef =
+        DataHolder().db.collection("profiles").doc(idUser).withConverter(
+              fromFirestore: Profile.fromFirestore,
+              toFirestore: (Profile profile, _) => profile.toFirestore(),
+            );
 
     DocumentSnapshot docsnap = await docRef.get();
     return docsnap.exists;
-
   }
-
 
   void singOut(context) async {
     print("ME DESLOGUESOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");

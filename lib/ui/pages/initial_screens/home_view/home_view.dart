@@ -4,18 +4,13 @@ import 'package:theratyp/ui/pages/user_screen/drawer_view.dart';
 import 'package:youtube_api/youtube_api.dart';
 
 class HomeView extends StatefulWidget {
-
   const HomeView({Key? key}) : super(key: key);
 
   @override
   State<HomeView> createState() => _HomeViewState();
-
 }
 
 class _HomeViewState extends State<HomeView> {
-
-
-
   final TextEditingController searchController = TextEditingController();
 
   late String text;
@@ -24,9 +19,7 @@ class _HomeViewState extends State<HomeView> {
 
   YoutubeAPI youtube = YoutubeAPI(key, maxResults: 3);
 
-
   List<YouTubeVideo> videoResult = [];
-
 
   //late String consulta;
 
@@ -46,28 +39,21 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Future<List<YouTubeVideo>> callAPI() async {
-
     videoResult = await youtube.search(
       text,
       order: 'relevance',
       videoDuration: 'any',
     );
     videoResult = await youtube.nextPage();
-    setState(() {
-
-    });
+    setState(() {});
 
     return videoResult;
   }
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerView(),
+      drawer: const DrawerView(),
       backgroundColor: Colors.green.shade50,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.grey),
@@ -103,7 +89,8 @@ class _HomeViewState extends State<HomeView> {
                   height: 10,
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                   decoration: BoxDecoration(
                     color: Colors.blueGrey.shade50,
                     borderRadius: BorderRadius.circular(20),
@@ -117,10 +104,10 @@ class _HomeViewState extends State<HomeView> {
                         icon: const Icon(Icons.search),
                         color: Colors.black54,
                         onPressed: () {
-                            setState(() {
-                              text = searchController.text;
-                              //callAPI();
-                            });
+                          setState(() {
+                            text = searchController.text;
+                            //callAPI();
+                          });
                         },
                       ),
                       hintText: text,
@@ -135,7 +122,11 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
           ),
-          Expanded(child: MasonryLayout(context,listaVideo: videoResult,)),
+          Expanded(
+              child: MasonryLayout(
+            context,
+            listaVideo: videoResult,
+          )),
         ]),
       ),
     );

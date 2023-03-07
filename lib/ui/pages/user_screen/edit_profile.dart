@@ -1,12 +1,8 @@
-
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:theratyp/ui/widget/button.dart';
 
 import '../../../data/auth/admin_data.dart';
-import '../../../data/data_holder.dart';
 import '../../widget/input_text.dart';
 
 class EditProfile extends StatefulWidget {
@@ -26,8 +22,6 @@ class _EditProfileState extends State<EditProfile> {
   final _country = TextEditingController();
 
   String imageUrl = ' ';
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +43,8 @@ class _EditProfileState extends State<EditProfile> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
-              IconButton(icon: const Icon(Icons.camera_alt),
+              IconButton(
+                  icon: const Icon(Icons.camera_alt),
                   onPressed: () {
                     AdminData().pickUploadImage().then((value) => imageUrl);
                   }),
@@ -82,9 +76,12 @@ class _EditProfileState extends State<EditProfile> {
                 bObscureText: false,
                 icon: Icons.place,
               ),
-              Button(onTap: () {
-                AdminData().insertProfile(_name.text, int.parse(_age.text), _city.text, _country.text, imageUrl, context);
-              }, name: 'Update Profile'),
+              Button(
+                  onTap: () {
+                    AdminData().insertProfile(_name.text, int.parse(_age.text),
+                        _city.text, _country.text, imageUrl, context);
+                  },
+                  name: 'Update Profile'),
             ],
           ),
         ),

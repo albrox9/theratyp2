@@ -26,10 +26,12 @@ class _DrawerViewState extends State<DrawerView> {
               toFirestore: (Profile profile, _) => profile.toFirestore(),
             );
     final docSnap = await ref.get();
-    profile = docSnap.data()!;
+    setState(() {
+      profile = docSnap.data()!;
+    });
 
     if (profile != null) {
-      print(profile.name);
+      print("-----" + profile.name.toString());
     } else {
       print("No such document.");
     }
@@ -50,27 +52,25 @@ class _DrawerViewState extends State<DrawerView> {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Colors.green,
-            ),
-
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(profile.imagen),
-                  radius: 43,
-                ),
-                Text(
-                  profile.name!,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            )
-          ),
+              decoration: const BoxDecoration(
+                color: Colors.green,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage('http://${profile.imagen}'),
+                    radius: 43,
+                  ),
+                  Text(
+                    profile.name!,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              )),
           ListItem(
             text: "Edit Profile",
             icon: Icons.person_3,
