@@ -4,6 +4,9 @@ import 'package:theratyp/ui/pages/initial_screens/home_view/home_view.dart';
 import 'package:theratyp/ui/pages/initial_screens/sign_in.dart';
 import 'package:theratyp/ui/pages/initial_screens/sign_up.dart';
 import 'package:theratyp/ui/pages/initial_screens/splash_view.dart';
+import 'package:theratyp/ui/pages/user_screen/edit_profile.dart';
+
+import 'data/data_holder.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,13 +20,14 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home_view',
+      initialRoute: DataHolder().auth.currentUser == null ? '/login_view' : '/splash_view',
       routes: {
         '/splash_view': (context) => const SplashView(),
         '/login_view': (context) => LoginView(),
         '/sign_up': (context) => SignUp(),
-        '/home_view': (context) => const HomeView(),
-        '/forgot_password': (context) => const ForgotPassword(),
+        '/home_view': (context) => HomeView(),
+        '/forgot_password': (context) => ForgotPassword(),
+        '/edit_profile': (context)=> EditProfile(),
       }
     );
   }

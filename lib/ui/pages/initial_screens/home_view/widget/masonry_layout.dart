@@ -1,40 +1,13 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:youtube_api/youtube_api.dart';
 
-class MasonryLayout extends StatefulWidget {
-  const MasonryLayout (BuildContext context, {Key? key}) : super(key: key);
-
-  @override
-  State<MasonryLayout> createState() => _MasonryLayout();
-}
-
-class _MasonryLayout extends State<MasonryLayout> {
-
-  static String key = "AIzaSyBjw98SyzLwdZ0Qo0lD_Uh54TZape07QDk";
-
-  YoutubeAPI youtube = YoutubeAPI(key, maxResults: 100);
-
-  List<YouTubeVideo> videoResult = [];
+class MasonryLayout extends StatelessWidget {
 
 
-  Future<void> callAPI() async {
-    String query = "pilates";
-    videoResult = await youtube.search(
-      query,
-      order: 'relevance',
-      videoDuration: 'any',
-    );
-    videoResult = await youtube.nextPage();
-    setState(() {});
-  }
+ final  List<YouTubeVideo> listaVideo;
 
-  @override
-  void initState() {
-    super.initState();
-    callAPI();
-  }
+  const MasonryLayout(BuildContext context, {super.key, required this.listaVideo});
 
 
   @override
@@ -45,12 +18,14 @@ class _MasonryLayout extends State<MasonryLayout> {
       mainAxisSpacing: 6,
       crossAxisCount: 2,
       //gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-      itemCount: videoResult.length,
-      itemBuilder: (context, index){
+      itemCount: listaVideo.length,
+      itemBuilder: (context, index) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.network(videoResult[index].thumbnail.small.url ?? '',
-            fit: BoxFit.cover,),
+          child: Image.network(
+            listaVideo[index].thumbnail.small.url ?? '',
+            fit: BoxFit.cover,
+          ),
         );
       },
     );

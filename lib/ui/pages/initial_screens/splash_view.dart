@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../data/auth/admin_data.dart';
+
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
 
@@ -20,7 +22,25 @@ class _State extends State<SplashView> with TickerProviderStateMixin {
         setState(() {});
       });
     controller.repeat(reverse: true);
+    loadData();
     super.initState();
+  }
+
+  void loadData() async {
+    //Función en la que vamos a cargar todos los recursos necesarios (aunque hay cosas que se cargan antes)
+    await Future.delayed(const Duration(seconds: 2));
+
+    bool pExist = await AdminData().isGetProfile();
+
+    if (pExist) {
+      setState(() {
+        Navigator.of(context).popAndPushNamed("/home_view");
+      });
+    } else {
+      setState(() {
+        Navigator.of(context).popAndPushNamed("/edit_profile");
+      });
+    }
   }
 
   @override
@@ -60,9 +80,6 @@ class _State extends State<SplashView> with TickerProviderStateMixin {
                     value: controller.value,
                     color: Colors.orange,
                   ),
-                ]
-            )
-        )
-    );
+                ])));
   }
 }

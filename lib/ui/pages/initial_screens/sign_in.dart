@@ -1,21 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:theratyp/ui/pages/initial_screens/forgot_password.dart';
 import 'package:theratyp/ui/pages/initial_screens/home_view/home_view.dart';
 import 'package:theratyp/ui/pages/initial_screens/widget_initial/background_image.dart';
 import 'package:theratyp/ui/pages/initial_screens/widget_initial/button_google.dart';
 import 'package:theratyp/ui/widget/button.dart';
 
+import '../../../data/auth/admin_data.dart';
+import '../../../data/data_holder.dart';
 import '../../widget/input_text.dart';
 import 'sign_up.dart';
 
 class LoginView extends StatelessWidget {
-  final userController = TextEditingController();
-  final userPassword = TextEditingController();
+
 
   LoginView({Key? key}) : super(key: key);
 
+  final userController = TextEditingController();
+  final userPassword = TextEditingController();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+
   @override
   Widget build(BuildContext context) {
+
+    String? username;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -54,13 +64,38 @@ class LoginView extends StatelessWidget {
             Button(
               onTap: () {
                 //TODO VER SI HAY QUE CAMBIAR RUTA HACIA LA HOME
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const HomeView()));
-              }, name: 'Sign In',
+
+                AdminData()
+                    .singIn(userController.text, userPassword.text, context)
+                    .then((result) async => {
+                          if (result == null){
+
+                              if(await AdminData().isGetProfile()){
+                                Navigator.of(context).popAndPushNamed("/home_view")
+                              } else {
+                                Navigator.of(context).popAndPushNamed("/edit_profile")
+                              }
+
+                          }
+                          else
+                            {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      content: Text(
+                                result,
+                                style: TextStyle(fontSize: 16),
+                              )))
+                            }
+                        });
+              },
+              name: 'Sign In',
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const ForgotPassword()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>  ForgotPassword()));
               },
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
@@ -83,7 +118,14 @@ class LoginView extends StatelessWidget {
             ButtonGoogle(
               onTap: () {
                 //TODO IMPLEMENTAR LA RUTA DE GOOGLE
-              }, name: 'Sign In with Google',
+                _googleSignIn.signIn().then((value){
+                  Navigator.of(context).popAndPushNamed('/profile_view');
+                  print(value?.email);
+
+                });
+
+              },
+              name: 'Sign In with Google',
             ),
             GestureDetector(
               onTap: () {
