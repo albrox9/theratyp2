@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "313295516572",
+    "project_id": "theratyp-6e334",
+    "storage_bucket": "theratyp-6e334.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313295516572:android:2e9f0b912657a0d94d8e59",
+        "android_client_info": {
+          "package_name": "com.example.theratyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313295516572-omi56qga8ra5p7jn6rinbkli02jlva9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.theratyp",
+            "certificate_hash": "faa173840cfdff82f24e6ac9338fa93a16c18648"
+          }
+        },
+        {
+          "client_id": "313295516572-j9tmmmm8bujnnsdjgse6p5qig2nnjvhe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvgi_tLpXwLYEEkDBJbKe4uXjIdYIji04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313295516572-fii2ndn58004sansgadb282ejq2tnc8p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "313295516572-d7j68kfhtpgf3s2fu4vr5jlk9qhh58v5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.theratyp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
