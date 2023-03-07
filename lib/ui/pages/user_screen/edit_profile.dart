@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:theratyp/data/entities/profile.dart';
 import 'package:theratyp/ui/widget/button.dart';
 
 import '../../../data/auth/admin_data.dart';
@@ -9,7 +10,10 @@ import '../../../data/data_holder.dart';
 import '../../widget/input_text.dart';
 
 class EditProfile extends StatefulWidget {
-  EditProfile({Key? key}) : super(key: key);
+
+  final Profile profile;
+
+  EditProfile({Key? key, required this.profile}) : super(key: key);
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -26,24 +30,10 @@ class _EditProfileState extends State<EditProfile> {
 
   String imageUrl = ' ';
 
-  bool enabledBoton() {
-    bool enabled = false;
-    (_name.text.length > 1 &&
-            _age.text.length > 1 &&
-            _city.text.length > 1 &&
-            _country.text.length > 1)
-        ? enabled = true
-        : enabled = false;
-    return enabled;
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    isProfile();
-
-
   }
 
   @override
@@ -105,19 +95,8 @@ class _EditProfileState extends State<EditProfile> {
               ),
               Button(
                   onTap: () {
-                    if (enabledBoton()) {
-                      setState(() {
-                        AdminData().insertProfile(
-                            _name.text,
-                            int.parse(_age.text),
-                            _city.text,
-                            _country.text,
-                            imageUrl,
-                            context);
-                      });
-                    } else {
-                      null;
-                    }
+                    AdminData().insertProfile(_name.text, int.parse(_age.text),
+                        _city.text, _country.text, imageUrl, context);
                   },
                   name: 'Update Profile'),
             ],
@@ -125,20 +104,5 @@ class _EditProfileState extends State<EditProfile> {
         ),
       ),
     );
-  }
-
-  Future<void> isProfile() async {
-
-    bool pExist = await AdminData().isGetProfile();
-
-    if (pExist) {
-      setState(() {
-        Navigator.of(context).popAndPushNamed("/home_view");
-      });
-    } else {
-      setState(() {
-        Navigator.of(context).popAndPushNamed("/edit_profile");
-      });
-    }
   }
 }

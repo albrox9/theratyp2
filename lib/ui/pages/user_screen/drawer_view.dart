@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:theratyp/data/auth/admin_data.dart';
 import 'package:theratyp/data/data_holder.dart';
 import 'package:theratyp/data/entities/profile.dart';
+import 'package:theratyp/ui/pages/user_screen/edit_profile.dart';
 import 'package:theratyp/ui/pages/user_screen/list_item.dart';
 
 class DrawerView extends StatefulWidget {
@@ -18,7 +19,6 @@ class _DrawerViewState extends State<DrawerView> {
   FirebaseFirestore _db = DataHolder().db;
   FirebaseAuth _auth = DataHolder().auth;
   Profile profile = DataHolder().profile;
-
 
   void getData() async {
 
@@ -83,7 +83,13 @@ class _DrawerViewState extends State<DrawerView> {
             text: "Edit Profile",
             icon: Icons.person_3,
             onTap: () {
-              Navigator.popAndPushNamed(context, '/edit_profile');
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditProfile(profile: profile,),
+                ),
+              );
             },
           ),
           ListItem(

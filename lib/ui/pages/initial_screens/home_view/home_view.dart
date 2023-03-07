@@ -29,7 +29,7 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
     text = searchController.text;
     searchController.addListener(() => searchController.text);
-    //callAPI();
+    callAPI();
   }
 
   @override
@@ -106,7 +106,7 @@ class _HomeViewState extends State<HomeView> {
                         onPressed: () {
                           setState(() {
                             text = searchController.text;
-                            //callAPI();
+                            callAPI();
                           });
                         },
                       ),
