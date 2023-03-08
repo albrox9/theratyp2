@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//Formato de boton para las key.
 class Button extends StatelessWidget {
 
   final Function() onTap;

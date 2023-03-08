@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//Widget para formato de las diferentes pages
+
 class BackgroundImage extends StatelessWidget {
   final String url;
 

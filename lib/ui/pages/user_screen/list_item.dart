@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Formato de los list del menu de usuario.
 class ListItem extends StatelessWidget {
   final String text;
   final IconData icon;

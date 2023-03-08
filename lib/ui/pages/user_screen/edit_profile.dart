@@ -58,14 +58,14 @@ class _EditProfileState extends State<EditProfile> {
             children: [
               CircleAvatar(
                 radius: 62.0,
-                backgroundImage: NetworkImage(imageUrl),
+                backgroundImage: NetworkImage(imageUrl), //Recupera la url del metodo que guarda y descarga las fotos en el storage.
               ),
               IconButton(
                   icon: const Icon(Icons.camera_alt),
                   onPressed: () {
                     AdminData().pickUploadImage().then((value) {
                       setState(() {
-                        imageUrl = value;
+                        imageUrl = value; // recupero la url del metodo que recupera las fotos del storage.
                       });
                     });
                   }),
@@ -96,7 +96,7 @@ class _EditProfileState extends State<EditProfile> {
               Button(
                   onTap: () {
                     AdminData().insertProfile(_name.text, int.parse(_age.text),
-                        _city.text, _country.text, imageUrl, context);
+                        _city.text, _country.text, imageUrl, context); //Inserta el perfil, y la url recuperada del storage.
                   },
                   name: 'Update Profile'),
             ],

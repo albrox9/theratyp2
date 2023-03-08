@@ -10,15 +10,20 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
+//Desde aqui llamamos a la Api de Youtube para poder hacer la query.
+//He puesto el limite solo a 20 videos, pero se pueden recuperar los que quieras con la variable maxResult
+//Aunque maxResoult tiene un tope. Si haces muchas llamadas la Api deja de funcionar porque tiene un limiete.
+
 class _HomeViewState extends State<HomeView> {
   final TextEditingController searchController = TextEditingController();
 
   late String text;
 
-  static String key = "AIzaSyBjw98SyzLwdZ0Qo0lD_Uh54TZape07QDk";
+  static String key = "AIzaSyBjw98SyzLwdZ0Qo0lD_Uh54TZape07QDk"; //Codigo de la APi
 
   YoutubeAPI youtube = YoutubeAPI(key, maxResults: 20);
 
+  //Lista que almacena y que paso a la pagina que construye el video con los resutlados de la query.
   List<YouTubeVideo> videoResult = [];
 
 
@@ -26,9 +31,9 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    text = 'meditacion';
+    text = 'maria plaza carrasco'; //valor inicial que le doy al text para que la home tenga una pantalla de presentacion.
     searchController.addListener(() => searchController.text);
-    callAPI();
+    callAPI(); //metodo que realiza la Api.
   }
 
   @override
@@ -37,6 +42,7 @@ class _HomeViewState extends State<HomeView> {
     super.dispose();
   }
 
+  //Metodo que hace las llamada a la API.
   Future<List<YouTubeVideo>> callAPI() async {
     videoResult = await youtube.search(
       text,

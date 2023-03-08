@@ -5,11 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'entities/profile.dart';
 
 class DataHolder {
+
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore db = FirebaseFirestore.instance;
   GlobalKey<FormState> keyForm = GlobalKey();
   FirebaseStorage storage = FirebaseStorage.instance;
   Profile profile = Profile();
+  String videoUrlYoutube = '';
 
   static final DataHolder _dataHolder = DataHolder._internal();
 

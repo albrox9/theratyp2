@@ -30,6 +30,8 @@ class _State extends State<SplashView> with TickerProviderStateMixin {
     //Función en la que vamos a cargar todos los recursos necesarios (aunque hay cosas que se cargan antes)
     await Future.delayed(const Duration(seconds: 2));
 
+    //Comprueba si el usuario registrado tiene perfil y si no lo lleva a que lo edite. Los de google siempre tienen perfil
+    //En los de google coge los datos y los inserta de forma automática.
     bool pExist = await AdminData().isGetProfile();
 
     if (pExist) {

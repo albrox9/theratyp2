@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//Formato del boton de google en las pages de registro.
+
 class ButtonGoogle extends StatelessWidget {
   final Function() onTap;
   final String name;

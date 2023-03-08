@@ -64,7 +64,7 @@ class SignUp extends StatelessWidget {
             ),
             Button(
               onTap: () {
-                //TODO IMPLEMENTAR LA RUTA PORQUE NO SE A DONDE VA
+                //Compruebo que las contraseñas sean iguales. Si lo son se hace registro y si no se muestra un banner.
                 if (passwordController.text == passwordController2.text) {
                   AdminData().signUp(
                       emailController.text, passwordController.text, context);
@@ -90,7 +90,11 @@ class SignUp extends StatelessWidget {
             ),
             ButtonGoogle(
               onTap: () {
-                //TODO IMPLEMENTAR LA RUTA PORQUE NO SE A DONDE VA
+                //Te lleva directamente a la home porque crea el perfil de forma automática.
+                AdminData().signInWithGoogle().then((value){
+                  AdminData().insertProfile(value.user!.displayName.toString(), 0, ' ', ' ', value.user!.photoURL.toString(), context);
+                });
+                Navigator.of(context).popAndPushNamed('/home_view');
               },
               name: 'Sign Up with Google',
             ),
@@ -102,7 +106,7 @@ class SignUp extends StatelessWidget {
                 TextSpan(
                     text: 'Have an Account? ',
                     style: TextStyle(color: Colors.black)),
-                TextSpan(text: 'Login', style: TextStyle(color: Colors.green)),
+                TextSpan(text: 'Login', style: TextStyle(color: Colors.green)), //Te lleva a la Login.
               ])),
             ),
           ],

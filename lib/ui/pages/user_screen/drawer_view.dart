@@ -21,6 +21,7 @@ class _DrawerViewState extends State<DrawerView> {
   FirebaseAuth _auth = DataHolder().auth;
   Profile profile = DataHolder().profile;
 
+  //Recupero el perfil del usuario.
   void getData() async {
     final ref =
         _db.collection("profiles").doc(_auth.currentUser?.uid).withConverter(
@@ -30,7 +31,7 @@ class _DrawerViewState extends State<DrawerView> {
 
     final docSnap = await ref.get();
     profile = docSnap.data()!;
-    setState(() {});
+    setState(() {}); //Necesito el setState para que me actualice los datos, si los cambio.
 
     if (profile != null) {
       print("-----" + profile.name.toString());
@@ -43,7 +44,7 @@ class _DrawerViewState extends State<DrawerView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
+    getData(); //Llamo al metodo en el init state, para que me cargue los dtos del perfil.
   }
 
   @override
@@ -86,19 +87,21 @@ class _DrawerViewState extends State<DrawerView> {
             text: "Search",
             icon: Icons.search_rounded,
             onTap: () {
-              ;
+              //TODO GUARDAR UNA LISTA CON LAS BUSQUEDAS QUE REALIZA EL USUARIO
             },
           ),
           ListItem(
             text: "Favorites",
             icon: Icons.favorite,
-            onTap: () {},
+            onTap: () {
+              //TODO GUARDAR LOS VIDEOS FAVORITOS DEL USUARIO DONDE HAGA UN LONGPRESS.
+            },
           ),
           ListItem(
             text: "Log Out",
             icon: Icons.exit_to_app,
             onTap: () {
-              AdminData().singOut(context);
+              AdminData().singOut(context); //nos desloguea estemos con email o con google.
             },
           ),
         ],

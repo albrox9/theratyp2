@@ -4,6 +4,8 @@ import 'package:theratyp/ui/pages/initial_screens/widget_initial/background_imag
 import '../../widget/button.dart';
 import '../../widget/input_text.dart';
 
+//Pantalla para la recuperacion de contraseña. Te manda un correo y se puede resetear.
+
 class ForgotPassword extends StatelessWidget {
   ForgotPassword({Key? key}) : super(key: key);
 
