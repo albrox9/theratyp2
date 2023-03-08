@@ -19,7 +19,7 @@ class _HomeViewState extends State<HomeView> {
 
   late String text;
 
-  static String key = "AIzaSyBjw98SyzLwdZ0Qo0lD_Uh54TZape07QDk"; //Codigo de la APi
+  static String key = "AIzaSyCnX63CaDl6cfK1YRQdYNHR6zSauG3vUcg"; //Codigo de la APi
 
   YoutubeAPI youtube = YoutubeAPI(key, maxResults: 20);
 
@@ -115,9 +115,6 @@ class _HomeViewState extends State<HomeView> {
                           });
                         },
                       ),
-                      hintText: text,
-                      hintStyle:
-                          const TextStyle(color: Colors.grey, fontSize: 15),
                     ),
                   ),
                 ),
