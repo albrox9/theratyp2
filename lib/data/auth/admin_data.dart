@@ -11,6 +11,7 @@ import 'dart:io';
 
 class AdminData {
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
 
   Future pickUploadImage() async {
@@ -58,7 +59,7 @@ class AdminData {
 
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
@@ -71,6 +72,7 @@ class AdminData {
     );
 
     // Once signed in, return the UserCredential
+
     return await DataHolder().auth.signInWithCredential(credential);
   }
 
@@ -138,6 +140,7 @@ class AdminData {
   void singOut(context) async {
     print("ME DESLOGUESOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
     await DataHolder().auth.signOut();
+    await _googleSignIn.signOut();
     Navigator.of(context).popAndPushNamed('/login_view');
   }
 }

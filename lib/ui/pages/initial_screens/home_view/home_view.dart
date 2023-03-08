@@ -17,17 +17,16 @@ class _HomeViewState extends State<HomeView> {
 
   static String key = "AIzaSyBjw98SyzLwdZ0Qo0lD_Uh54TZape07QDk";
 
-  YoutubeAPI youtube = YoutubeAPI(key, maxResults: 3);
+  YoutubeAPI youtube = YoutubeAPI(key, maxResults: 20);
 
   List<YouTubeVideo> videoResult = [];
 
-  //late String consulta;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    text = searchController.text;
+    text = 'meditacion';
     searchController.addListener(() => searchController.text);
     callAPI();
   }

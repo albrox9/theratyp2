@@ -11,9 +11,9 @@ import '../../widget/input_text.dart';
 
 class EditProfile extends StatefulWidget {
 
-  final Profile profile;
 
-  EditProfile({Key? key, required this.profile}) : super(key: key);
+
+  EditProfile({Key? key}) : super(key: key);
 
   @override
   State<EditProfile> createState() => _EditProfileState();

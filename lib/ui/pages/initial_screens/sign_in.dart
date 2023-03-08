@@ -1,14 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:theratyp/ui/pages/initial_screens/forgot_password.dart';
-import 'package:theratyp/ui/pages/initial_screens/home_view/home_view.dart';
 import 'package:theratyp/ui/pages/initial_screens/widget_initial/background_image.dart';
 import 'package:theratyp/ui/pages/initial_screens/widget_initial/button_google.dart';
 import 'package:theratyp/ui/widget/button.dart';
 
 import '../../../data/auth/admin_data.dart';
-import '../../../data/data_holder.dart';
 import '../../widget/input_text.dart';
 import 'sign_up.dart';
 
@@ -17,11 +13,10 @@ class LoginView extends StatelessWidget {
 
   final userController = TextEditingController();
   final userPassword = TextEditingController();
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
 
   @override
   Widget build(BuildContext context) {
-    String? username;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -114,10 +109,11 @@ class LoginView extends StatelessWidget {
             ButtonGoogle(
               onTap: () {
                 //TODO IMPLEMENTAR LA RUTA DE GOOGLE
-                _googleSignIn.signIn().then((value) {
-                  Navigator.of(context).popAndPushNamed('/home_view');
-                  print(value?.email);
-                });
+               AdminData().signInWithGoogle().then((value){
+                 AdminData().insertProfile(value.user!.displayName.toString(), 0, ' ', ' ', value.user!.photoURL.toString(), context);
+               });
+               Navigator.of(context).popAndPushNamed('/home_view');
+
               },
               name: 'Sign In with Google',
             ),
