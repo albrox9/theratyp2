@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:theratyp/ui/pages/initial_screens/home_view/widget/masonry_layout.dart';
 import 'package:theratyp/ui/pages/user_screen/drawer_view.dart';
 import 'package:youtube_api/youtube_api.dart';
@@ -19,9 +20,9 @@ class _HomeViewState extends State<HomeView> {
 
   late String text;
 
-  static String key = "AIzaSyCnX63CaDl6cfK1YRQdYNHR6zSauG3vUcg"; //Codigo de la APi
+   //Codigo de la APi
 
-  YoutubeAPI youtube = YoutubeAPI(key, maxResults: 20);
+  YoutubeAPI youtube = YoutubeAPI('${dotenv.env['API_KEY']}', maxResults: 20);
 
   //Lista que almacena y que paso a la pagina que construye el video con los resutlados de la query.
   List<YouTubeVideo> videoResult = [];

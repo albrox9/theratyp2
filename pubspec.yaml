@@ -44,6 +44,7 @@ dependencies:
   google_sign_in: ^6.0.2
   image_picker: ^0.8.6+4
   firebase_storage: ^11.0.15
+  flutter_dotenv: ^5.0.0
 
 
 dev_dependencies:
@@ -79,6 +80,7 @@ flutter:
      - assets/images/onboarding4.png
      - assets/images/onboarding5.jpg
      - assets/images/forgot.png
+     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -12,6 +12,7 @@ class DataHolder {
   FirebaseStorage storage = FirebaseStorage.instance;
   Profile profile = Profile();
   String videoUrlYoutube = '';
+  String api= '';
 
   static final DataHolder _dataHolder = DataHolder._internal();
 
